@@ -1,0 +1,15 @@
+# Dependencias de desarrollo y testing
+# Instalar con: pip install -r requirements-dev.txt
+
+# Testing framework
+pytest>=7.4.0
+pytest-cov>=4.1.0       # Cobertura de tests
+pytest-mock>=3.12.0     # Fixtures de mock integrados
+
+# Linting y formateo
+flake8>=6.1.0          # Linting de código
+black>=23.11.0         # Formateo automático
+mypy>=1.7.0            # Type checking
+
+# Debugging
+ipdb>=0.13.13          # Debugger mejorado

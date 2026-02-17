@@ -1,0 +1,25 @@
+# Extractor de Datos JSON desde CSV de Logs
+# Dependencias del proyecto
+
+# Cliente oficial de Elasticsearch
+# Incluye helpers para paginación automática (scan) y manejo de grandes volúmenes
+elasticsearch>=8.11.0,<9.0.0
+
+# Gestión de variables de entorno
+# Permite cargar credenciales desde archivo .env de forma segura
+python-dotenv>=1.0.0
+
+# ===== DEPENDENCIAS OPCIONALES =====
+# Descomentar según necesidad:
+
+# click>=8.1.0
+# CLI más amigable con decoradores (alternativa a argparse)
+
+# elasticsearch-dsl>=8.11.0
+# DSL pythónico para construir queries (opcional, más expresivo)
+
+# ===== DEPENDENCIAS DE DESARROLLO =====
+# Descomentar para desarrollo y testing:
+# pytest>=7.4.0
+# pytest-cov>=4.1.0
+# pytest-mock>=3.12.0

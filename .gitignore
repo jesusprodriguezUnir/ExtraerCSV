@@ -1,2 +1,61 @@
-/datos_extraidos.json
-/Error Evaluacion Niveles Escala.csv
+# Archivos de configuración con credenciales
+.env
+config.json
+config.local.json
+credentials.json
+*.env
+!.env.example
+
+# Archivos CSV temporales de descarga
+logs_*.csv
+temp_*.csv
+downloaded_*.csv
+
+# Archivos de salida generados
+datos_extraidos.json
+output_*.json
+
+# Archivos de datos de ejemplo (descomentar si no quieres subirlos)
+# Error Evaluacion Niveles Escala.csv
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Entornos virtuales
+venv/
+ENV/
+env/
+.venv
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Sistema operativo
+.DS_Store
+Thumbs.db

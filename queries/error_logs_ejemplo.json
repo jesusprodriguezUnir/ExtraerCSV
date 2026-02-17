@@ -1,0 +1,34 @@
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "wildcard": {
+            "message": "*Body:*"
+          }
+        },
+        {
+          "term": {
+            "level": "ERROR"
+          }
+        }
+      ],
+      "filter": [
+        {
+          "range": {
+            "@timestamp": {
+              "gte": "2026-02-10",
+              "lte": "2026-02-17"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "_source": [
+    "message",
+    "@timestamp",
+    "level",
+    "applicationName"
+  ]
+}

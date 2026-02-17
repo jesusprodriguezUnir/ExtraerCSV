@@ -1,0 +1,32 @@
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "wildcard": {
+            "message": "*Body:*"
+          }
+        },
+        {
+          "exists": {
+            "field": "message"
+          }
+        }
+      ],
+      "filter": [
+        {
+          "range": {
+            "@timestamp": {
+              "gte": "now-7d",
+              "lte": "now"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "_source": [
+    "message",
+    "@timestamp"
+  ]
+}
