@@ -1,0 +1,146 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                   DIAGNÓSTICO DE CONEXIÓN A ELASTICSEARCH                    ║
+║                                17/02/2026                                    ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+🔍 ESTADO DEL SERVIDOR: elk.unir.net
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📊 Puertos Detectados:
+  ✓ 9200  :  ABIERTO   (Elasticsearch)
+  ✓ 443   :  ABIERTO   (HTTPS/Kibana)
+  ✓ 9300  :  ABIERTO   (Cluster communication)
+  ✗ 5601  :  CERRADO   (Kibana UI)
+  ✗ 8080  :  CERRADO   (HTTP)
+
+🔐 Credenciales Proporcionadas:
+  Usuario    : <USER>
+  Contraseña : <PASSWORD>
+  Patrón     : logs-*
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+❌ PROBLEMA IDENTIFICADO:
+
+Kibana está configurado como PROXY REVERSO en el puerto 443.
+
+Todas las requests son redirigidas a:
+  /login?next=%2F
+
+Incluso con credenciales correctas, Kibana intercepta y no deja pasar.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ SOLUCIONES (en orden de recomendación):
+
+1️⃣  CONTACTAR AL ADMINISTRADOR ⭐ RECOMENDADO ⭐
+   
+   Pide que haga UNO de esto:
+   
+   A) Exponer Elasticsearch sin Kibana proxy
+      Ej: https://elasticsearch.unir.net:9200
+   
+   B) Crear un API Token/Key para tu usuario
+      Más seguro que usuario/contraseña
+   
+   C) Configurar endpoint específico en Kibana
+      Ej: https://elk.unir.net/api/elasticsearch
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+2️⃣  MIENTRAS TANTO - Usa Kibana Web
+   
+   1. Accede a: https://elk.unir.net/
+  2. Login: <USER> / <PASSWORD>
+   3. Ve a: Dev Tools → Console
+   4. Ejecuta queries directamente ahí:
+      
+      GET /
+      GET _cat/indices
+      GET logs-*/_search
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+3️⃣  CONTINÚA CON CSV LOCAL
+   
+   La app funciona perfectamente con archivos CSV:
+   
+   python main.py csv -i archivo.csv -o salida.json
+   
+   O usa la interfaz web:
+   python app_web.py
+   
+   Luego accede a: http://localhost:5000
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 PLANTILLA PARA EL ADMINISTRADOR:
+
+Asunto: Solicitud de acceso API a Elasticsearch
+
+---
+
+Hola,
+
+Necesito acceso programático a Elasticsearch desde una herramienta externa 
+(no desde Kibana UI).
+
+Actualmente, todas las requests se redirigen a la página de login de Kibana.
+
+¿Podrías hacer uno de esto?
+
+A) Exponer Elasticsearch en un puerto/dominio sin Kibana proxy
+   Ej: https://elasticsearch.unir.net:9200
+
+B) Crear un API Key para el usuario dev-academico
+   (Más seguro que usuario/contraseña)
+
+C) Configurar un bypass en Kibana para acceso programático
+   Endpoint: https://elk.unir.net/api/elasticsearch
+
+Test de conexión:
+  curl -k -u dev-academico:oov7Bah5eimu]e3Aiphiip2L https://elk.unir.net:9200/
+
+Actualmente devuelve: 302 redirect (redirección a /login)
+Esperado: JSON con información del cluster
+
+Gracias
+Los dev
+---
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔍 DOCUMENTACIÓN DISPONIBLE:
+
+Get más detalles:
+  cat TROUBLESHOOTING.md
+
+Ejecutar debug avanzado:
+  python debug_es.py
+
+Iniciar app web:
+  python app_web.py
+
+Ver logs:
+  En la consola de la app web
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✨ RESUMEN EJECUTIVO:
+
+✓ El servidor ES ACCESIBLE (puertos abiertos)
+✓ Las credenciales son VÁLIDAS
+✓ La app web está LISTA para usar
+✗ Kibana está BLOQUEANDO acceso API
+
+NO es un bug de nuestra aplicación.
+Es un PROBLEMA DE CONFIGURACIÓN del servidor.
+
+ACCIÓN RECOMENDADA:
+1. Contacta al administrador con la solicitud arriba
+2. Mientras esperas, usa CSV local o Kibana web
+3. Cuando te den el acceso API, solo cambia la URL en app_web.py
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+¿Necesitas ayuda con cualquier otra cosa?

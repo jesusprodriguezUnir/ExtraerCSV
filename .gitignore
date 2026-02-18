@@ -59,3 +59,33 @@ env/
 # Sistema operativo
 .DS_Store
 Thumbs.db
+
+# Coverage HTML and reports
+htmlcov/
+*.html
+
+# ----- Archivos sensibles (no subir nunca) -----
+# Claves privadas y certificados
+id_rsa
+id_rsa.pub
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+
+# Credenciales y secretos
+.secrets
+.vault
+.netrc
+.aws/credentials
+.docker/config.json
+credentials.yml.enc
+
+# Sistema de gestión de secretos local
+.env.local
+.env.*.local
+
+# Llaves y tokens
+*.token
+*.keyring

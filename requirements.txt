@@ -9,6 +9,12 @@ elasticsearch>=8.11.0,<9.0.0
 # Permite cargar credenciales desde archivo .env de forma segura
 python-dotenv>=1.0.0
 
+# Framework web para interfaz de usuario
+flask>=3.1.0
+
+# CORS para Flask (acceso desde cliente web)
+flask-cors>=6.0.0
+
 # ===== DEPENDENCIAS OPCIONALES =====
 # Descomentar según necesidad:
 

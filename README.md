@@ -13,6 +13,7 @@ Herramienta Python para extraer y procesar datos JSON embebidos en archivos CSV 
 - ⚙️ **Configuración flexible** - queries personalizables de Elasticsearch
 - 📝 **Estadísticas detalladas** - resumen completo al finalizar
 - 🔒 **Seguro** - credenciales en archivo `.env` no commiteado
+- 🌐 **Interfaz web** - GUI moderna para visualizar y configurar conexiones
 
 ## 📋 Requisitos
 
@@ -37,6 +38,35 @@ cp .env.example .env
 ```
 
 ## 💻 Uso
+
+### 🌐 Opción recomendada: Interfaz Web (con GUI)
+
+La forma más fácil y visual de usar la aplicación:
+
+```bash
+# Windows
+start_web.bat
+
+# Linux/Mac
+bash start_web.sh
+
+# O manualmente
+python app_web.py
+```
+
+Accede a **http://localhost:5000** en tu navegador.
+
+**Características:**
+- ✅ Login visual con credenciales
+- ✅ Explorador de índices interactivo
+- ✅ Editor de queries con sintaxis JSON
+- ✅ Visor de resultados con formato
+- ✅ Exportación a JSON
+- ✅ Interfaz responsive (mobile-friendly)
+
+[📖 Ver documentación completa de la interfaz web](WEB_README.md)
+
+---
 
 ### Opción 1: Procesar CSV local
 
@@ -460,7 +490,37 @@ Las contribuciones son bienvenidas. Por favor:
 4. Push a la rama (`git push origin feature/AmazingFeature`)
 5. Abre un Pull Request
 
-## 📄 Licencia
+## � Troubleshooting
+
+### Problema: No puedo conectar a Elasticsearch
+
+**Síntomas:**
+- Error 302 o redirección a `/login`
+- Error 401 (Unauthorized)
+- Error de certificado SSL
+
+**Soluciones:**
+
+📖 [Ver guía completa de troubleshooting →](TROUBLESHOOTING.md)
+
+**Verificación rápida:**
+```bash
+# Ejecutar script de depuración
+python debug_es.py
+
+# Probar conexión manual
+curl -k -u usuario:contraseña https://elasticsearch-host:puerto/
+```
+
+⚠️ **Nota importante**: Si Kibana está en frente de Elasticsearch (como proxy), 
+necesitarás contactar al administrador para:
+- Exponer Elasticsearch en un endpoint sin Kibana
+- O crear un API Key para acceso programático
+- O configurar un bypass específico
+
+Ver [`TROUBLESHOOTING.md`](TROUBLESHOOTING.md) completo para todas las opciones.
+
+## �📄 Licencia
 
 Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
 
